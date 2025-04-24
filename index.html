@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Watch</title>
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            /* background-color: black; */
+            background: linear-gradient(-45deg, #f0f06e, #bbb344, #ffdde1, #a1c4fd, #c2e9fb);
+            /* color: yellow; */
+            background-size: 500% 500%;
+            font-family: Arial, Helvetica, sans-serif;
+            /* font-size: 3rem; */
+            animation: backgroundAnimation 8s infinite alternate;
+        }
+        @keyframes backgroundAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            25% {
+                background-position: 25% 75%;
+            }
+            50% {
+                background-position: 50% 100%;
+            }
+            75% {
+                background-position: 75% 25%;
+            }
+            100% {
+                background-position: 100% 50%;
+            }
+        }
+
+        #clock,#date{
+            /* border: 2px solid yellow; */
+            /* padding: 20px; */
+            /* border-radius: 10px; */
+            /* box-shadow: 0px 0px 10px rgb(129, 129, 3); */
+            border: 3px solid white;
+            padding: 25px;
+            border-radius: 20px;
+            font-size: 2rem;
+            color: #fff;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+            text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.8);
+            box-shadow: 0px 0px 40px rgba(255, 255, 255, 1);
+            animation:glow 1s infinite alternate;
+            margin: 10px;
+            width: 300px;
+        }
+        #clock{
+            font-size: 3rem;
+        }
+        @keyframes glow{
+            from{
+                /* text-shadow: 0 0 10px yellow; */
+                box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.6);
+            }
+            to{
+                /* text-shadow: 0 0 20px yellow,0 0 30px rgb(92, 92, 2); */
+                box-shadow: 0px 0px 50px rgba(255, 255, 255, 1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="clock">00:00:00</div>
+    <div id="date">Loading date...</div>
+        
+    
+    
+
+
+    <script>
+        function updateClockAndDate(){
+            let now=new Date();
+            let hours=now.getHours().toString().padStart(2,"0");
+            let minutes=now.getMinutes().toString().padStart(2,"0");
+            let second=now.getSeconds().toString().padStart(2,"0");
+
+            let day = now.getDate().toString().padStart(2, '0');
+            let month = (now.getMonth() + 1).toString().padStart(2, '0');
+            let year = now.getFullYear();
+
+            let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            let dayName = days[now.getDay()];
+
+
+            document.getElementById("clock").innerHTML=`${hours}:${minutes}:${second}`;
+            document.getElementById('date').innerText = `${dayName}, ${day}/${month}/${year}`;
+        }
+        setInterval(updateClockAndDate,1000);
+        updateClockAndDate();
+
+    </script>
+</body>
+</html>
